@@ -7,7 +7,7 @@ export ZSH=/Users/pieter/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="bureau"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -96,5 +96,3 @@ export SAAS_HOST="localhost"
 alias saasrestoredb="scp -l 8192 backups@bluebucket.onepercentclub.com:/home/backups/saas-backups/saas/reef-prod-current.sql.bz2 ./; dropdb $SAAS_DB; createdb $SAAS_DB; bzcat reef-prod-current.sql.bz2 | psql $SAAS_DB; rm reef-prod-current.sql.bz2; echo \"UPDATE clients_client SET domain_url=CONCAT(client_name, '.$SAAS_HOST');\" | psql $SAAS_DB"
 
 alias runserver="cd ~/development/bluebottle; workon bluebottle; python manage.py runserver; cd -"
-
-
