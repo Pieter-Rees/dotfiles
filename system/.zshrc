@@ -7,7 +7,7 @@ export ZSH=/Users/pieter/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="bureau"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -32,7 +32,7 @@ ZSH_THEME="bureau"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
- COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -51,7 +51,7 @@ ZSH_THEME="bureau"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git virtualenvwrapper zsh-wakatime node)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -87,7 +87,6 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="/Users/pieter/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -95,4 +94,24 @@ export SAAS_DB="reef"
 export SAAS_HOST="localhost"
 alias saasrestoredb="scp -l 8192 backups@bluebucket.onepercentclub.com:/home/backups/saas-backups/saas/reef-prod-current.sql.bz2 ./; dropdb $SAAS_DB; createdb $SAAS_DB; bzcat reef-prod-current.sql.bz2 | psql $SAAS_DB; rm reef-prod-current.sql.bz2; echo \"UPDATE clients_client SET domain_url=CONCAT(client_name, '.$SAAS_HOST');\" | psql $SAAS_DB"
 
-alias runserver="cd ~/development/bluebottle; workon bluebottle; python manage.py runserver; cd -"
+alias runserver="cd ~/development/bluebottle; python manage.py runserver; cd -"
+alias serve="cd ~/development/reef/frontend; CLIENTS=onepercent LOCALES=en MAPS_API_KEY=AIzaSyCsUbYPmNR84nin7GWy-hJ-jnZQO1g70SA PROXY=http://localhost:8000 ember serve --live-reload-port=35729"
+export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=0
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+### Theming extra's
+
+POWERLEVEL9K_SHOW_CHANGESET=true
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="•• "
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(nvm node_version background_jobs ram virtualenv rbenv rvm)
